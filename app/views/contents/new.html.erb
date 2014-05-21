@@ -1,0 +1,29 @@
+<h1>Contents#new</h1>
+
+<% if @content.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@content.errors.count, "error") %>
+      prohibited this content from being saved:</h2>
+    <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @content, :html => { multipart: true } do |f| %>
+  <p>
+    <%= f.label :s3_bucket %><br />
+    <%= f.text_field :s3_bucket %>
+  </p>
+  <p>
+    <%= f.label :upload_filename %><br />
+    <%= f.file_field :upload_filename %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', contents_path %>

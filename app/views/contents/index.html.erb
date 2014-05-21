@@ -1,0 +1,22 @@
+<h1>Contents#index</h1>
+
+<%= link_to 'Upload a new file', new_content_path %>
+
+<table>
+  <tr>
+    <th>File name</th>
+    <th>Size</th>
+    <th>S3 Bucket name</th>
+    <th>&nbsp;</th>
+  </tr>
+
+  <% @contents.each do |content| %>
+    <tr>
+      <td><a href="<%= content.s3_url %>" target="_blank"><%= content.filename %></a></td>
+      <td><%= content.size %></td>
+      <td><%= content.s3_bucket %></td>
+      <td><%= link_to 'Destroy', content_path(content),
+                method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
